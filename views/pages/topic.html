@@ -1,19 +1,26 @@
-<div class="page">
-	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/trix/0.9.2/trix.css">
-	<!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script> -->
-	<script src="//cdnjs.cloudflare.com/ajax/libs/trix/0.9.2/trix.js"></script>
-	<!-- <script src="dist/angular-trix.min.js"></script> -->
-	<h1>{{ topic.name }}</h1>
-	<ul>
-		<li ng-repeat="thread in threads">
-			<a ui-sref="thread({threadId: thread._id})">{{ thread.title }}</a>
-			by {{ thread.author }} at {{ thread.createdAt | date }}
-		</li>
-	</ul>
-	<h2>Create a new thread</h2>
-	<form ng-submit="createThread(thread)">
-		<input type="text" placeholder="Post title!" ng-model="thread.title">
-		<trix-editor angular-trix ng-model="thread.content" class="trix-content"></trix-editor>
-		<button type="submit">Create Post</button>
-	</form>
-</div>
+<section class="module-medium">
+	<div class="page">
+		<div class="container">
+			<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/trix/0.9.2/trix.css">
+			<!-- <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script> -->
+			<script src="//cdnjs.cloudflare.com/ajax/libs/trix/0.9.2/trix.js"></script>
+			<script src="dist/angular-trix.min.js"></script>
+			<h2 class="font-alt">{{ topic.name }}</h2>
+			<h4 class="font-serif">{{ topic.description }}</h4>
+			<div class="row">
+				<ul>
+					<li ng-repeat="thread in threads">
+						<a ui-sref="thread({threadId: thread._id})">{{ thread.title }}</a>
+						by {{ thread.author }} at {{ thread.createdAt | date }}
+					</li>
+				</ul>
+			</div>
+			<h2 class="font-alt">Create a new thread</h2>
+			<form ng-submit="createThread(thread)">
+				<input type="text" placeholder="Post title!" ng-model="thread.title">
+				<trix-editor angular-trix ng-model="thread.content" class="trix-content"></trix-editor>
+				<button type="submit">Create Post</button>
+			</form>
+		</div>
+	</div>
+</section>
