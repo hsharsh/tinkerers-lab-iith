@@ -4,7 +4,6 @@ angular.module('forum', ['angular-meteor', 'ui.router', 'angularTrix'])
         $urlRouterProvider
             .when('/', '/welcome')
             .otherwise('/welcome');
-        // Add states
 
         $stateProvider.state('welcome', {
             url: '/welcome',
@@ -21,6 +20,12 @@ angular.module('forum', ['angular-meteor', 'ui.router', 'angularTrix'])
             templateUrl: 'views/pages/blogs.html',
             controller: 'BlogsController'
         });
+
+        $stateProvider.state('blog', {
+            url: '/blog/:blogId',
+            templateUrl: 'views/pages/blog.html',
+            controller: 'BlogController'
+        })
 
         $stateProvider.state('topics', {
             url: '/topics',
@@ -41,7 +46,7 @@ angular.module('forum', ['angular-meteor', 'ui.router', 'angularTrix'])
         });
 
     })
-    .run(function($state, $rootScope) {
+    .run(function($state, $rootScope, $sce) {
         // We inject $state here to initialize ui.router 
         $rootScope.helpers({
             availableAccountAction: function() {
@@ -51,6 +56,10 @@ angular.module('forum', ['angular-meteor', 'ui.router', 'angularTrix'])
                 return 'Sign In';
             }
         });
+
+        $rootScope.trustHtml = function(stuff) {
+            return $sce.trustAsHtml(stuff);
+        };
 
         $rootScope.logInorOut = function() {
             if (!Meteor.user()) {
@@ -126,9 +135,6 @@ angular.module('forum', ['angular-meteor', 'ui.router', 'angularTrix'])
             }
         });
 
-        $scope.trustHtml = function(stuff) {
-            return $sce.trustAsHtml(stuff);
-        };
 
         $scope.createPost = function(post) {
             $meteor.call("createPost", $stateParams.threadId, post.content).then(function() {
@@ -138,7 +144,7 @@ angular.module('forum', ['angular-meteor', 'ui.router', 'angularTrix'])
             });
         };
     })
-    .controller('BlogsController', function($scope) {
+    .controller('BlogsController', function($scope, $stateParams) {
         $scope.subscribe('blogs');
         $scope.helpers({
             blogs: function() {
@@ -146,7 +152,20 @@ angular.module('forum', ['angular-meteor', 'ui.router', 'angularTrix'])
                     sort: {
                         name: 1,
                         author: 1
-                    }
+                    },
+                });
+            }
+        });
+    })
+    .controller('BlogController', function($scope, $stateParams) {
+        $scope.subscribe('blog', function() {
+            return [$stateParams.blogId];
+        });
+
+        $scope.helpers({
+            blog: function() {
+                return Blogs.findOne({
+                    _id: $stateParams.blogId
                 });
             }
         });

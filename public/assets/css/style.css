@@ -231,6 +231,13 @@ a,
   padding: 140px 60px 140px;
 }
 
+.topic-text {
+  background: #fff;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 60px 60px 60px;
+}
+
 /* Dark background */
 .bg-dark,
 .bg-dark-30,
@@ -917,7 +924,7 @@ blockquote {
   font-weight: 400;
   font-size: 30px;
   color: #111;
-  margin: 0 0 70px;
+  margin: 0 0 50px;
 }
 
 .module-subtitle {
@@ -1458,7 +1465,7 @@ General Styles - Owlcarousel
 
 /* Blog Page Header */
 .blog-page-header {
-  background-position: 50% 24%;
+  background-position: 50% 50%;
   background-repeat: no-repeat;
 }
 
@@ -2170,9 +2177,10 @@ Google map
 }
 
 .post-entry {
-  border-top: 1px dotted #c2c2c2;
+  /*border-top: 1px dotted #c2c2c2;*/
   padding-top: 20px;
   margin-top: 10px;
+  font-size: 1.75em;
 }
 
 .post-images-slider {
