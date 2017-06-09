@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Logs
 logs
 *.log
@@ -57,3 +58,6 @@ typings/
 # dotenv environment variables file
 .env
 
+=======
+node_modules/
+>>>>>>> 6405877e54fed49e152c0d62c7bdbbc19c6d11f3
